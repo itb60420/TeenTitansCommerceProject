@@ -1,17 +1,5 @@
-#form-start {
-    visibility: hidden;
-    display: none;
-}
-
-#form-end {
-    visibility: hidden;
-    display: none;
-}
-
-#submit {
+#submit-reservation {
     position: relative;
     float: right;
-    margin-right: 10em;
-    height: 30px;
-    width: 60px;
+    margin-right: 8em;
 }
