@@ -3,10 +3,11 @@ import CalendarPicker from './calendar-picker';
 import './calendar.css';
 import Button from 'react-bootstrap/Button';
 
-const Calendar = () => {
+const Calendar = ({userID}) => {
     const [startDay, setStartDay] = useState('');
     const [endDay, setEndDay] = useState('');
     const KEYMAP_TO_DB = "http://localhost:8080/calendar/submit"
+    console.log(userID);
 
     const handle_startDay= (day) => {
         const newDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
@@ -21,10 +22,6 @@ const Calendar = () => {
         else setEndDay('');
     }
     
-    const submitClick = () => {
-
-    }
-
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(e);
@@ -32,22 +29,20 @@ const Calendar = () => {
         const check2 = validate_day(endDay);
 
         const validated = check1 && check2 ? true : false;
-        try {
-        validated ? (
+        validated && userID ? (
                 fetch(KEYMAP_TO_DB, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({startDay: startDay, endDay: endDay})
+                body: JSON.stringify({startDay: startDay, endDay: endDay, id: userID})
             })
-            .then(console.log(JSON.stringify({startDay: startDay, endDay: endDay})))
-            .then()
+            .then(console.log(JSON.stringify({startDay: startDay, endDay: endDay, id: userID})))
+            // .then(resp => resp.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.log(error))
         ) : alert("Select two days before submitting.");
-    } catch(error) {
-        console.log(error);
-    }
 }
 
     function validate_day (day) {
