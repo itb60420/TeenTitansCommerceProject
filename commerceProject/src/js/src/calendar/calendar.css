@@ -1,149 +1,17 @@
-.calendar {
-    width: 900px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
+#form-start {
+    visibility: hidden;
+    display: none;
+}
+
+#form-end {
+    visibility: hidden;
+    display: none;
+}
+
+#submit {
     position: relative;
-    top: 5%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, 0%);
-}
-
-.calendar-header {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    top: 0%;
-}
-
-.startDay {
-    float: left;
-}
-
-.endDay {
     float: right;
-    margin-top: -1.2em;
-}
-
-.calendar-body {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 10%;
-}
-
-.viewDay {
-    text-align: center;
-    left: 45%;
-}
-
-#chevron-left {
-    display: inline-block;
-    width: 80px;
-    height: 100px;
-    position: absolute;
-    top: 6.5%;
-    left: 38%;
-}
-
-#chevron-right {
-    display: inline-block;
-    width: 80px;
-    height: 100px;
-    position: absolute;
-    top: 6.5%;
-    right: 29.5%;
-}
-
-#chevron-left:after {
-    display: block;
-    content: "";
-    width: 0px;
-    height: 0em;
-    border-style: solid;
-    position: absolute;
-}
-
-#chevron-right:after {
-    display: block;
-    content: "";
-    width: 0;
-    height: 0em;
-    border-style: solid;
-    position: absolute;
-}
-
-#chevron-left:before {
-    right: 0;
-    border-width: .4em 0 .4em .4em;
-    border-color: transparent transparent transparent red;
-}
-
-#chevron-right:before {
-    right: 0;
-    border-width: .4em 0 .4em .4em;
-    border-color: transparent transparent transparent red;
-}
-
-.table-header {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.weekday {
-    width: 100px;
-    text-align: center;
-}
-
-.table-content {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.calendar-day {
-    width: 125px;
-    height: 75px;
-    position: relative;
-    border: 1px solid #a6a6a6;
-}
-
-.calendar-day:hover {
-    background-color: rgba(0, 0, 0, .10);
-}
-
-.calendar-day p {
-    position: absolute;
-    right: 10px;
-    color: #a6a6a6;
-}
-
-.current p {
-    color: #000000;
-}
-
-.selected {
-    background-color: rgba(43, 202, 29, 0.1)
-}
-
-.selected p {
-    color: #197007;
-    font-weight: bold;
-}
-
-.inbetween {
-    background-color: rgba(43, 202, 29, 0.1)
-}
-
-.inbetween p {
-    color: #197007;
+    margin-right: 10em;
+    height: 30px;
+    width: 60px;
 }

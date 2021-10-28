@@ -1,8 +1,10 @@
-import CalendarPicker from './calendar';
+import Calendar from './calendar';
 
 function App() {
     return ( 
-    <CalendarPicker />
+    <>
+    <Calendar />
+    </>
     );
 }
 
