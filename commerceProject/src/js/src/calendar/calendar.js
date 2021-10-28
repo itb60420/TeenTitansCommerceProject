@@ -38,16 +38,20 @@ const Calendar = ({userID}) => {
                 },
                 body: JSON.stringify({startDay: startDay, endDay: endDay, id: userID})
             })
-            .then(console.log(JSON.stringify({startDay: startDay, endDay: endDay, id: userID})))
-            // .then(resp => resp.json())
-            // .then(data => console.log(data))
-            // .catch(error => console.log(error))
-        ) : alert("Select two days before submitting.");
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+        ) : alert("Ensure your selection is valid.");
 }
 
     function validate_day (day) {
-        
-        return day ? true : false;
+        const today = new Date();
+        const cutoffStart = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate())
+        const cutoffEnd = new Date(today.getFullYear(), today.getMonth() + 6, today.getDate())
+        if(day && day === startDay)
+            return day >= today && day <= cutoffStart;
+        else
+            return day >= startDay && day <= cutoffEnd;
     }
     return(
     <>

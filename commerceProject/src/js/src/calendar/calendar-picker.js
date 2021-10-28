@@ -3,7 +3,6 @@ import CalendarDays from './calendar-days';
 import ChevronLeft from './chevronLeft';
 import ChevronRight from './chevronRight';
 import './calendar-picker.css';
-
 export default class CalendarPicker extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +15,7 @@ export default class CalendarPicker extends Component {
         this.state = {
             today: new Date(),
             viewDay: new Date(),
+            displayStart: null
         }
     }
 
@@ -37,19 +37,61 @@ export default class CalendarPicker extends Component {
         this.setState({ viewDay: new Date(day.year, day.month, day.number) })
     }
 
-    render() {
+    changeDiplayStart = (text) => {
+        this.setState({displayStart: new Date(text)});
+    }
 
+    userChangeStartDay = (text) => {
+
+        this.props.handle_startDay(new Date(text));
+    }
+
+    userChangeEndDay = (text) => {
+
+        this.props.handle_endDay(new Date(text));
+    }
+
+
+    timerStart = (text) => {
+        setTimeout(() => {
+            this.userChangeStartDay(text)
+        }, 500);
+    }
+
+    timerEnd = (text) => {
+        setTimeout(() => {
+            this.userChangeEndDay(text)
+        }, 500);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot, timer) {
+        console.log("updated");
+        clearTimeout(this.timerStart);
+        clearTimeout(this.timerEnd);
+    }
+
+    render() {
         let displayStart = this.props.startDay ? "" + (this.months[this.props.startDay.getMonth()] + " " + this.props.startDay.getDate() + ", " + this.props.startDay.getFullYear()) : "";
         let displayEnd = this.props.endDay ? "" + (this.months[this.props.endDay.getMonth()] + " " + this.props.endDay.getDate() + ", " + this.props.endDay.getFullYear()) : "";
         return ( 
         <div className = "calendar" >
+            <div className = "startDayCollection" > 
+                <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
+                <label for="startDay" className="lbStart">MM/DD/YY</label>
+            </div>
+            <div className = "endDayCollection" > 
+                <input type="text" className="txtEnd" name="endDay" onChange={(e) => this.timerEnd(e.target.value)} />
+                <label for="endDay" className="lbEnd">MM/DD/YY</label>
+            </div>
           <div className = "calendar-header" >
             <h2 >
-            <div className = "startDay" > { displayStart } 
-            </div> 
+            <div className="startDay">
+            { displayStart } 
+            </div>
             </h2> 
             <div className = "endDay" >
-            <h2 > { displayEnd } 
+            <h2> 
+            { displayEnd } 
             </h2>
             </div>
             </div>
