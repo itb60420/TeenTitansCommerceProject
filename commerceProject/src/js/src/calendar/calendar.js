@@ -25,6 +25,7 @@ const Calendar = ({userID}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(e);
+        console.log(JSON.stringify({startDay: startDay, endDay: endDay, id: userID}))
         const check1 = validate_day(startDay);
         const check2 = validate_day(endDay);
 
@@ -46,10 +47,11 @@ const Calendar = ({userID}) => {
 
     function validate_day (day) {
         const today = new Date();
+        let todayTrimmed = new Date(today.getFullYear(), today.getMonth(), today.getDate())
         const cutoffStart = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate())
         const cutoffEnd = new Date(today.getFullYear(), today.getMonth() + 6, today.getDate())
         if(day && day === startDay)
-            return day >= today && day <= cutoffStart;
+            return day >= todayTrimmed && day <= cutoffStart;
         else
             return day >= startDay && day <= cutoffEnd;
     }
