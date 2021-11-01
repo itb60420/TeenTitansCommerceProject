@@ -13,9 +13,6 @@ function App() {
           <Link className="navbar-brand" to={"/sign-in"}>Commerce Bank Hotel Cubicle System</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Sign in</Link>
-              </li>
             </ul>
           </div>
         </div>
