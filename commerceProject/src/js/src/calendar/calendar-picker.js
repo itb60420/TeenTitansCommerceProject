@@ -15,13 +15,9 @@ export default class CalendarPicker extends Component {
         this.state = {
             today: new Date(),
             viewDay: new Date(),
-            displayStart: null
         }
     }
 
-    // changeStartDay = (day) => {
-    //     this.setState({ startDay: new Date(day.year, day.month, day.number) });
-    // }
     changeStartDay = (day) => {
         this.props.handle_startDay(new Date(day.year, day.month, day.number));
     }
@@ -107,7 +103,7 @@ export default class CalendarPicker extends Component {
             </div> 
             <div className = "table-header" > {
                 this.daysOfWeek.map((day) => {
-                    return <div className = "weekday" > < p > { day } < /p></div >
+                    return <div className = "weekday"><p> { day } </p></div>
                 })
             } </div> 
             <CalendarDays viewDay = { this.state.viewDay }

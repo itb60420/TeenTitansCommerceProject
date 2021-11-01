@@ -4,7 +4,7 @@ function CalendarDays(props) {
   let currentDay = firstDayOfMonth;
   let todayTrimmed = new Date(props.today.getFullYear(), props.today.getMonth(), props.today.getDate());
   let cutoffStart = new Date(todayTrimmed.getFullYear(), todayTrimmed.getMonth() + 3, todayTrimmed.getDate());
-  let cutoffEnd = new Date(todayTrimmed.getFullYear(), todayTrimmed.getMonth() + 3, todayTrimmed.getDate());
+  let cutoffEnd = new Date(todayTrimmed.getFullYear(), todayTrimmed.getMonth() + 6, todayTrimmed.getDate());
   let currentDays = [];
 
   for (let day = 0; day < 42; day++) {

@@ -4,8 +4,8 @@ import './calendar.css';
 import Button from 'react-bootstrap/Button';
 
 const Calendar = ({userID}) => {
-    const [startDay, setStartDay] = useState('');
-    const [endDay, setEndDay] = useState('');
+    const [startDay, setStartDay] = useState();
+    const [endDay, setEndDay] = useState();
     const KEYMAP_TO_DB = "http://localhost:8080/calendar/submit"
     console.log(userID);
 
