@@ -30,7 +30,8 @@ const Calendar = ({userID}) => {
         const check2 = validate_day(endDay);
 
         const validated = check1 && check2 ? true : false;
-        validated && userID ? (
+        //validated && userID ? (
+            validated ? (
                 fetch(KEYMAP_TO_DB, {
                 method: 'POST',
                 headers: {

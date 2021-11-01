@@ -1,3 +1,5 @@
+import Calendar from "./calendar";
+
 function CalendarDays(props) {
   let firstDayOfMonth = new Date(props.viewDay.getFullYear(), props.viewDay.getMonth(), 1);
   let weekdayOfFirstDay = firstDayOfMonth.getDay();
@@ -17,7 +19,8 @@ function CalendarDays(props) {
     }
 
     let calendarDay = {
-      currentMonth: (currentDay.getMonth() === props.viewDay.getMonth() && currentDay >= todayTrimmed && currentDay <= cutoffEnd),
+      currentMonth: (currentDay.getMonth() === props.viewDay.getMonth() && currentDay >= todayTrimmed && currentDay <= cutoffStart),
+      current: (currentDay >= todayTrimmed && currentDay <= cutoffEnd),
       date: (new Date(currentDay)),
       year: currentDay.getFullYear(),
       month: currentDay.getMonth(),
@@ -39,7 +42,7 @@ function CalendarDays(props) {
           //If the date is in the current month AND we dont have a start day, select it
           //otherwise if we have both dates selected, allow reselection of first day
           //otherwise we have a start day, pick a end date
-                onClick={() => day.currentMonth && !props.startDay ? props.changeStartDay(day) : 
+                onClick={() => day.current && !props.startDay ? props.changeStartDay(day) : 
                 props.startDay && props.endDay && day.date >= todayTrimmed && day.date <= cutoffStart ? (props.changeStartDay(day), props.changeEndDay(null)) : 
                 props.startDay && day.date > props.startDay && day.date <= cutoffStart ? props.changeEndDay(day) : null}>
             <p>{day.number}</p>

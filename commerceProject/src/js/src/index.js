@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './calendar/App';
+import App from './reservation/App';
 
 ReactDOM.render( 
 <React.StrictMode>
