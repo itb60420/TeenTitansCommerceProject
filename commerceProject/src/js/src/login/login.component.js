@@ -5,7 +5,10 @@ import {Link, BrowserRouter as  Router, Route, Switch} from 'react-router-dom';
 export default class Login extends Component{
     
     render() {
-        return (<form>
+        return (
+    <div className="outer">
+      <div className="inner">
+        <form>
 
             <h3>Log in To Reserve Your Cubicle</h3>
 
@@ -19,8 +22,10 @@ export default class Login extends Component{
                 <input type="password" className="form-control" placeholder="Enter password" />
             </div>
             <Link to="/Reservationlist">
-            <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button></Link>
+            <button type="submit" className="btn btn-dark btn-lg btn-block right">Sign in</button></Link>
         </form>
+        </div>
+        </div>
         );
     }
 }

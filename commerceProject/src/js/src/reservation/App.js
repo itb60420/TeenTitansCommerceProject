@@ -6,6 +6,7 @@ import Calendar from '../calendar/calendar';
 import { Container } from 'react-bootstrap';
 import Logout from './Logout';
 import Login from '../login/login.component'
+import '../login/App.css'
 
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
     />
     <Container>
     <Router>
+    <div className="navbar">
     <Header />
+    </div>
     <Link to="/">Login</Link>
-    <Route path = "/" exact={true} component={Login} />
+        <Route path = "/" exact={true} component={Login} />
     <Link to="/Reservationlist">Reservation List</Link>
     <Route path = "/Reservationlist" exact={true} component={Reservationslist} />
     <Link to="/ReserveACubicle">Reserve a cubicle</Link>
@@ -36,9 +39,5 @@ function App() {
 }
 
 export default App;
-    
-
-
-      
 
 

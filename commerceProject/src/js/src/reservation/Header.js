@@ -8,13 +8,19 @@ import Calendar from '../calendar/calendar'
 const Header = () => {
     return (
       <>
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="navbar">
     <Container>
     <Navbar.Brand href="#home">Commerce</Navbar.Brand>
     <Nav className="me-auto">
+    <div className="navbar-element">
       <Link class="link" to="/">Home</Link>
+    </div>
+    <div className="navbar-element">
       <Link class="link" to="/ReserveACubicle">Reserve A Cubicle</Link>
+      </div>
+      <div className="navbar-element">
       <Link class="link" to="/Logout">Logout</Link>
+      </div>
     </Nav>
     </Container>
   </Navbar>
