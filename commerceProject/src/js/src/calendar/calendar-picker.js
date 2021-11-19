@@ -3,6 +3,7 @@ import CalendarDays from './calendar-days';
 import ChevronLeft from './chevronLeft';
 import ChevronRight from './chevronRight';
 import './calendar-picker.css';
+import { FormGroup, Form } from 'react-bootstrap';
 export default class CalendarPicker extends Component {
     constructor(props) {
         super(props);
@@ -11,20 +12,34 @@ export default class CalendarPicker extends Component {
         this.months = ['January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
-
+        this.hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
         this.state = {
             today: new Date(),
             viewDay: new Date(),
+            startTime: this.hours[0] - 6,
+            endTime: this.hours[0] - 6
         }
     }
 
+    setStartTime = (value, day) => {
+        if (day)
+            this.props.handle_startDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value - 6));
+        this.setState({ startTime: value - 6});
+    }
+
+    setEndTime = (value, day) => {
+        if(day)
+            this.props.handle_endDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value - 6));
+        this.setState({ endTime: value - 6})
+    }
+
     changeStartDay = (day) => {
-        this.props.handle_startDay(new Date(day.year, day.month, day.number));
+        this.props.handle_startDay(new Date(day.year, day.month, day.number, this.state.startTime));
     }
 
     changeEndDay = (day) => {
         if(day) {
-          this.props.handle_endDay(new Date(day.year, day.month, day.number))
+          this.props.handle_endDay(new Date(day.year, day.month, day.number, this.state.endTime));
         } 
         else this.props.handle_endDay('');
     }
@@ -46,7 +61,6 @@ export default class CalendarPicker extends Component {
 
         this.props.handle_endDay(new Date(text));
     }
-
 
     timerStart = (text) => {
         setTimeout(() => {
@@ -71,6 +85,21 @@ export default class CalendarPicker extends Component {
         let displayEnd = this.props.endDay ? "" + (this.months[this.props.endDay.getMonth()] + " " + this.props.endDay.getDate() + ", " + this.props.endDay.getFullYear()) : "";
         return ( 
         <div className = "calendar" >
+        <div className="starttime">
+                    <FormGroup>
+                    <Form.Control as="select" custom onChange={(e) => this.setStartTime(e.target.value, this.props.startDay)} defaultValue={this.hours[0]}>
+                        {
+                            this.hours.map((hour) => {
+                                let time = hour > 11 ? "PM" : "AM"
+                                let mod = hour % 13;
+                                if (mod < this.hours[0])
+                                    mod += 1;
+                                return <option value={hour}>{mod} {time} </option>
+                            })
+                        }
+                    </Form.Control>
+                    </FormGroup>
+                </div>
             <div className = "startDayCollection" > 
                 <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
                 <label for="startDay" className="lbStart">MM/DD/YY</label>
@@ -79,6 +108,21 @@ export default class CalendarPicker extends Component {
                 <input type="text" className="txtEnd" name="endDay" onChange={(e) => this.timerEnd(e.target.value)} />
                 <label for="endDay" className="lbEnd">MM/DD/YY</label>
             </div>
+            <div className="endtime">
+                    <FormGroup>
+                    <Form.Control as="select" custom onChange={(e) => this.setEndTime(e.target.value, this.props.endDay)} defaultValue={this.hours[0]}>
+                        {
+                            this.hours.map((hour) => {
+                                let time = hour > 11 ? "PM" : "AM"
+                                let mod = hour % 13;
+                                if (mod < this.hours[0])
+                                    mod += 1;
+                                return <option value={hour}>{mod} {time} </option>
+                            })
+                        }
+                    </Form.Control>
+                    </FormGroup>
+                </div>
           <div className = "calendar-header" >
             <h2 >
             <div className="startDay">
@@ -112,6 +156,8 @@ export default class CalendarPicker extends Component {
             endDay = { this.props.endDay }
             changeStartDay = { this.changeStartDay }
             changeEndDay = { this.changeEndDay }
+            changeStartTime = {this.changeStartTime}
+            changeEndTime = {this.changeEndTime}
             /> 
             </div> 
             </div>

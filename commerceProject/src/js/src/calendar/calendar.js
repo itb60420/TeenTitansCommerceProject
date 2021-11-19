@@ -7,21 +7,32 @@ const Calendar = ({userID}) => {
     const [startDay, setStartDay] = useState();
     const [endDay, setEndDay] = useState();
     const KEYMAP_TO_DB = "http://localhost:8080/calendar/submit"
+    const today = new Date();
+    const workingHours = 9;
+    const closingHours = 18;
     console.log(userID);
 
     const handle_startDay= (day) => {
-        const newDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+        const newDate = packDay(day)
         setStartDay(newDate);
     };
 
     const handle_endDay=(day) => {
-        if(day && day !== '') {
-        const newDate = new Date(day.getFullYear(), day.getMonth(), day.getDate());
+        const newDate = packDay(day);
         setEndDay(newDate);
         }
-        else setEndDay('');
-    }
     
+
+    const packDay=(day) => {
+        if (day && day !== '') {
+            const newDate = day.getFullYear() < today.getFullYear() ? 
+            new Date(today.getFullYear(), day.getMonth(), day.getDate(), day.getHours())
+            : new Date(day.getFullYear(), day.getMonth(), day.getDate(), day.getHours());
+            return newDate;
+        }
+        else return '';
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
         console.log(e);
@@ -47,7 +58,6 @@ const Calendar = ({userID}) => {
 }
 
     function validate_day (day) {
-        const today = new Date();
         let todayTrimmed = new Date(today.getFullYear(), today.getMonth(), today.getDate())
         const cutoffStart = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate())
         const cutoffEnd = new Date(today.getFullYear(), today.getMonth() + 6, today.getDate())
@@ -56,9 +66,16 @@ const Calendar = ({userID}) => {
         else
             return day >= startDay && day <= cutoffEnd;
     }
+    
     return(
     <>
-        <CalendarPicker startDay={startDay} endDay={endDay} handle_startDay={handle_startDay} handle_endDay={handle_endDay}/>
+        <CalendarPicker 
+        startDay={startDay} 
+        endDay={endDay}
+        workingHours = {workingHours}
+        closingHours = {closingHours}
+        handle_startDay={handle_startDay} 
+        handle_endDay={handle_endDay} />
         <form>
         <div>
             <div className="form-group">
@@ -70,6 +87,6 @@ const Calendar = ({userID}) => {
         </form>
     </>
     )
-}
 
-export default Calendar;
+}
+    export default Calendar;
