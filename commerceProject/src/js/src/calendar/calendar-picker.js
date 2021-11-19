@@ -85,7 +85,12 @@ export default class CalendarPicker extends Component {
         let displayEnd = this.props.endDay ? "" + (this.months[this.props.endDay.getMonth()] + " " + this.props.endDay.getDate() + ", " + this.props.endDay.getFullYear()) : "";
         return ( 
         <div className = "calendar" >
-        <div className="starttime">
+
+            <div className = "startDayCollection" > 
+                <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
+                <label for="startDay" className="lbStart">MM/DD/YY</label>
+            </div>
+            <div className="starttime">
                     <FormGroup>
                     <Form.Control as="select" custom onChange={(e) => this.setStartTime(e.target.value, this.props.startDay)} defaultValue={this.hours[0]}>
                         {
@@ -99,10 +104,6 @@ export default class CalendarPicker extends Component {
                         }
                     </Form.Control>
                     </FormGroup>
-                </div>
-            <div className = "startDayCollection" > 
-                <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
-                <label for="startDay" className="lbStart">MM/DD/YY</label>
             </div>
             <div className = "endDayCollection" > 
                 <input type="text" className="txtEnd" name="endDay" onChange={(e) => this.timerEnd(e.target.value)} />
