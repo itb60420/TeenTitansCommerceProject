@@ -16,20 +16,20 @@ export default class CalendarPicker extends Component {
         this.state = {
             today: new Date(),
             viewDay: new Date(),
-            startTime: this.hours[0] - 6,
-            endTime: this.hours[0] - 6
+            startTime: this.props.startTime ? this.props.startTime : this.hours[0],
+            endTime: this.props.endTime ? this.props.endTime : this.hours[0] 
         }
     }
 
     setStartTime = (value, day) => {
         if (day)
-            this.props.handle_startDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value - 6));
+            this.props.handle_startDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value));
         this.setState({ startTime: value - 6});
     }
 
     setEndTime = (value, day) => {
         if(day)
-            this.props.handle_endDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value - 6));
+            this.props.handle_endDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value));
         this.setState({ endTime: value - 6})
     }
 
@@ -84,11 +84,11 @@ export default class CalendarPicker extends Component {
         let displayStart = this.props.startDay ? "" + (this.months[this.props.startDay.getMonth()] + " " + this.props.startDay.getDate() + ", " + this.props.startDay.getFullYear()) : "";
         let displayEnd = this.props.endDay ? "" + (this.months[this.props.endDay.getMonth()] + " " + this.props.endDay.getDate() + ", " + this.props.endDay.getFullYear()) : "";
         return ( 
-        <div className = "calendar" >
+        <div className = {"calendar" + (this.props.loading ? "loading" : "")}>
 
             <div className = "startDayCollection" > 
                 <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
-                <label for="startDay" className="lbStart">MM/DD/YY</label>
+                <label htmlFor="startDay" className="lbStart">MM/DD/YY</label>
             </div>
             <div className="starttime">
                     <FormGroup>

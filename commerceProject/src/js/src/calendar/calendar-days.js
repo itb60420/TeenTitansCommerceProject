@@ -42,7 +42,7 @@ function CalendarDays(props) {
           //If the date is in the current month AND we dont have a start day, select it
           //otherwise if we have both dates selected, allow reselection of first day
           //otherwise we have a start day, pick a end date
-                onClick={() => day.current && !props.startDay ? props.changeStartDay(day) : 
+                onClick={() => day.current && (!props.startDay || !props.endDay && props.startDay > day.date)  ? props.changeStartDay(day) : 
                 props.startDay && props.endDay && day.date >= todayTrimmed && day.date <= cutoffStart ? (props.changeStartDay(day), props.changeEndDay(null)) : 
                 props.startDay && day.date > props.startDay && day.date <= cutoffStart ? props.changeEndDay(day) : null}>
             <p>{day.number}</p>
