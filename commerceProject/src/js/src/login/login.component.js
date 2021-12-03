@@ -3,29 +3,55 @@ import Reservationslist from "../reservation/Reservationslist";
 import {Link, BrowserRouter as  Router, Route, Switch} from 'react-router-dom';
 
 export default class Login extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            email : "",
+            password: "",
+        }
+    }
+
+    handleEmailChange = (e) => {
+        this.setState({email: e});
+    }
+
+    handlePasswordChange = (e) => {
+        this.setState({password: e});
+    }
     
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(this.state.email)
+        console.log(this.state.password)
+        const resp = await fetch(`http://localhost:8080/sign-in?email=${this.state.email}&password=${this.state.password}`);
+        if(resp.ok) {
+            var data = await resp.json();
+            console.log(data);
+            if(data)
+                this.props.handle_login(data);
+        }
+        else console.log(resp.status);
+    }
     render() {
         return (
-    <div className="outer">
-      <div className="inner">
-        <form>
+        <body>
+        <div className="bck-image">
+            <form className="box">
+            <h1>Commerce Bank</h1> <b></b> <h1> Reserve A Cubicle</h1>
+                <label htmlFor="email"><b></b></label>
+                <input className="inemail"type="text" placeholder="Enter email" name="email" onChange={(e) => this.handleEmailChange(e.target.value)} required />
 
-            <h3>Log in To Reserve Your Cubicle</h3>
+                <label htmlFor="psw"><b></b></label>
+                <input className="inpsw" type="password" placeholder="Enter Password" name="password" onChange = {(e) => this.handlePasswordChange(e.target.value)} required />
 
-            <div className="form-group">
-                <label>Email</label>
-                <input type="email" className="form-control" placeholder="Enter email" />
+                <button className="SignBtn" onClick={(e) => this.handleSubmit(e)}>Sign In</button>
+                    
+            </form>
             </div>
+        </body>
 
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" className="form-control" placeholder="Enter password" />
-            </div>
-            <Link to="/Reservationlist">
-            <button type="submit" className="btn btn-dark btn-lg btn-block right">Sign in</button></Link>
-        </form>
-        </div>
-        </div>
         );
+
     }
+    
 }

@@ -1,6 +1,80 @@
-#submit-reservation {
-    position: relative;
-    float: right;
-    margin-right: 30%;
-    margin-top: 6%;
+
+.calbox{
+    background-color: darkgreen;
+    position: absolute;
+    top: 187px;
+    left: -300px;
+    width: 300px;
+    height: 450px;
+}
+
+.subBtn,#submit-reservation{
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    background-color: lightgray;
+    color: black;
+    width: 50%;
+    left: -132px;
+    top: -10px;
+
+   
+}
+
+.startDay {
+    color: lightgrey;
+    position: absolute;
+    top: 80px;
+    left: -270px;
+    font-size: 30px;
+}
+.endDay {
+    color: lightgrey;
+    position: absolute;
+    top: 215px;
+    left: -280px;
+    font-size: 30px;
+}
+
+
+
+.txtStart {
+    position: static;
+    margin: 20px;   
+    width: 85%;
+    margin-top: 60px;   
+    margin-bottom: 10px; 
+  
+
+}
+.txtEnd {
+    position: static;
+    margin: 20px;   
+    width: 85%;
+    margin-top: 20px;   
+    margin-bottom: 10px;  
+
+
+}
+
+.time{
+    position: static;
+    margin-top: 0px;
+    margin-left: 28px; 
+    margin-bottom: 70px;
+    width: 80%;
+    height: 1%;
+}
+
+
+.cubicleSel{
+    position: absolute;
+    cursor: pointer;
+    color: white;
+    width: 20%;
+    left: -240px;
+    top: -120px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: -50px;
 }

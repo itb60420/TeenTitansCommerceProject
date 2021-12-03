@@ -16,21 +16,22 @@ export default class CalendarPicker extends Component {
         this.state = {
             today: new Date(),
             viewDay: new Date(),
-            startTime: this.props.startTime ? this.props.startTime : this.hours[0],
-            endTime: this.props.endTime ? this.props.endTime : this.hours[0] 
+            startTime: this.hours[0],
+            endTime: this.hours[0]
         }
     }
+
 
     setStartTime = (value, day) => {
         if (day)
             this.props.handle_startDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value));
-        this.setState({ startTime: value - 6});
+        this.setState({ startTime: value});
     }
 
     setEndTime = (value, day) => {
         if(day)
             this.props.handle_endDay(new Date(day.getFullYear(), day.getMonth(), day.getDate(), value));
-        this.setState({ endTime: value - 6})
+        this.setState({ endTime: value})
     }
 
     changeStartDay = (day) => {
@@ -78,40 +79,48 @@ export default class CalendarPicker extends Component {
         console.log("updated");
         clearTimeout(this.timerStart);
         clearTimeout(this.timerEnd);
+        if(this.props.startDay && this.props.endDay) {
+            this.props.handle_cubicles(true);
+            console.log("executing")
+        }
+        else {
+            this.props.handle_cubicles(false)
+            console.log("stopping")
+        }
     }
 
     render() {
         let displayStart = this.props.startDay ? "" + (this.months[this.props.startDay.getMonth()] + " " + this.props.startDay.getDate() + ", " + this.props.startDay.getFullYear()) : "";
         let displayEnd = this.props.endDay ? "" + (this.months[this.props.endDay.getMonth()] + " " + this.props.endDay.getDate() + ", " + this.props.endDay.getFullYear()) : "";
         return ( 
-        <div className = {"calendar" + (this.props.loading ? "loading" : "")}>
-
+        <div className = "calendar">
+        <div className="calbox">
             <div className = "startDayCollection" > 
-                <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} />
-                <label htmlFor="startDay" className="lbStart">MM/DD/YY</label>
+                <input type="text" className="txtStart" name="startDay" onChange={(e) => this.timerStart(e.target.value)} placeholder="MM/DD/YY"/>
+                <label htmlFor="startDay" className="lbStart"></label>
             </div>
-            <div className="starttime">
+            <div className="time">
                     <FormGroup>
-                    <Form.Control as="select" custom onChange={(e) => this.setStartTime(e.target.value, this.props.startDay)} defaultValue={this.hours[0]}>
+                    <Form.Control as="select" onChange={(e) => this.setStartTime(e.target.value, this.props.startDay)} defaultValue={this.hours[0]}>
                         {
                             this.hours.map((hour) => {
                                 let time = hour > 11 ? "PM" : "AM"
                                 let mod = hour % 13;
                                 if (mod < this.hours[0])
                                     mod += 1;
-                                return <option value={hour}>{mod} {time} </option>
+                                return <option value={hour} key={hour}>{mod} {time} </option>
                             })
                         }
                     </Form.Control>
                     </FormGroup>
             </div>
             <div className = "endDayCollection" > 
-                <input type="text" className="txtEnd" name="endDay" onChange={(e) => this.timerEnd(e.target.value)} />
-                <label for="endDay" className="lbEnd">MM/DD/YY</label>
+                <input type="text" className="txtEnd" name="endDay" onChange={(e) => this.timerEnd(e.target.value)} placeholder="MM/DD/YY" />
+                <label htmlFor="endDay" className="lbEnd"></label>
             </div>
-            <div className="endtime">
+            <div className="time">
                     <FormGroup>
-                    <Form.Control as="select" custom onChange={(e) => this.setEndTime(e.target.value, this.props.endDay)} defaultValue={this.hours[0]}>
+                    <Form.Control as="select" onChange={(e) => this.setEndTime(e.target.value, this.props.endDay)} defaultValue={this.hours[0]}>
                         {
                             this.hours.map((hour) => {
                                 let time = hour > 11 ? "PM" : "AM"
@@ -123,6 +132,7 @@ export default class CalendarPicker extends Component {
                         }
                     </Form.Control>
                     </FormGroup>
+                </div>
                 </div>
           <div className = "calendar-header" >
             <h2 >
@@ -160,7 +170,7 @@ export default class CalendarPicker extends Component {
             changeStartTime = {this.changeStartTime}
             changeEndTime = {this.changeEndTime}
             /> 
-            </div> 
+            </div>
             </div>
         )
     }

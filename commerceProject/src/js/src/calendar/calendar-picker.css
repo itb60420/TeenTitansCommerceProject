@@ -1,11 +1,17 @@
+/*this is going for the variables to be in in calendar*/
+
+body{
+    background-color:  lightgreen;
+}
+
 .calendar {
     width: 900px;
     height: 600px;
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 5%;
-    left: 50%;
+    top: -20px;
+    left: 58%;
     margin-right: -50%;
     transform: translate(-50%, 0%);
 }
@@ -14,43 +20,13 @@
     width: 100%;
     text-align: center;
     position: absolute;
-    top: 17%;
+    top: 20%;
+    left: -7px;
+    font-size: 20px;
 }
 
-.startDayCollection {
-    position: absolute;
-    margin-top: 4%;
-    width: 1%;
-    height: 2%;
-}
 
-.endDayCollection {
-    position: absolute;
-    margin-top: 4%;
-    width: 1%;
-    height: 2%;
-    left: 80%;
-}
 
-.startDay {
-    float: left;
-}
-
-.lbStart {
-    position: relative;
-    font-size: 16px;
-    flex-wrap: wrap;
-}
-
-.txtStart {
-    position: relative;
-}
-
-.endDay {
-    float: right;
-    position: relative;
-    margin-top: -1%;
-}
 
 .calendar-body {
     width: 100%;
@@ -58,30 +34,33 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 10%;
+    top: 5%;
 }
 
 .viewDay {
     text-align: center;
     left: 45%;
+
 }
 
 #chevron-left {
+    border: solid black;
+    border-width: 0 5px 5px 0;
     display: inline-block;
-    width: 80px;
-    height: 100px;
-    position: absolute;
-    top: 6.5%;
-    left: 38%;
+    padding: 7px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+
 }
 
-#chevron-right {
+#chevron-right {    
+    border: solid black;
+    border-width: 0 5px 5px 0;
     display: inline-block;
-    width: 80px;
-    height: 100px;
-    position: absolute;
-    top: 6.5%;
-    right: 29.5%;
+    padding: 7px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+
 }
 
 #chevron-left:after {
@@ -115,6 +94,7 @@
 }
 
 .table-header {
+    
     height: 100px;
     width: 100%;
     display: flex;
@@ -137,6 +117,7 @@
 }
 
 .calendar-day {
+    
     width: 125px;
     height: 75px;
     position: relative;

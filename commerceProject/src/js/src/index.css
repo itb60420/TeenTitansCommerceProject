@@ -61,7 +61,7 @@ html,
 .outer h3 {
     text-align: center;
     margin: 0;
-    line-height: 1;
+    line-height: 3;
     padding-bottom: 20px;
     color: #ffffff;
 }
@@ -74,12 +74,42 @@ html,
     width: 100%;
 }
 
-.navbar-element {
-    padding-right: 2em;
-}
-
 .right {
     display: inline;
     margin-left: 35%;
     margin-top: 1em;
+}
+
+.navbar-group button {
+    background-color: rgb(0, 68, 0); /* Green background */
+    border: 1px solid black; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: right; /* Float the buttons side by side */
+
+  }
+  
+  /* Clear floats (clearfix hack) */
+  .navbar-group:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .navbar-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  /* Add a background color on hover */
+  .navbar-group button:hover {
+    background-color: rgb(1, 102, 1);
+  }
+  
+  .logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
 }

@@ -5,21 +5,16 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link, Router } from 'react-router-dom';
 import Calendar from '../calendar/calendar'
 
-const Header = () => {
+const Header = (props) => {
     return (
       <>
     <Navbar bg="dark" variant="dark" className="navbar">
     <Container>
-    <Navbar.Brand href="#home">Commerce</Navbar.Brand>
     <Nav className="me-auto">
-    <div className="navbar-element">
-      <Link class="link" to="/">Home</Link>
-    </div>
-    <div className="navbar-element">
-      <Link class="link" to="/ReserveACubicle">Reserve A Cubicle</Link>
-      </div>
-      <div className="navbar-element">
-      <Link class="link" to="/Logout">Logout</Link>
+    <div className="navbar-group">
+      <Link to="/">
+      <button className="hbtn" to="/" onClick={() => {props.handle_logout()}}>Logout</button></Link>
+
       </div>
     </Nav>
     </Container>
